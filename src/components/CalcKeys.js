@@ -22,7 +22,7 @@ class CalcKeys extends Component {
                     <button className="Key NumberTwo" onClick={this.props.handleOperand}>2</button>
                     <button className="Key NumberThree" onClick={this.props.handleOperand}>3</button>
                     <button className="Key MinusKey" onClick={this.props.handleOperator}>-</button>
-                    <button className="Key DecimalKey" onClick={this.props.handleOperand}>.</button>
+                    <button className="Key DecimalKey" onClick={this.props.handleDecimal}>.</button>
                     <button className="Key NumberZero" onClick={this.props.handleOperand}>0</button>
                     <button className="Key DivisionKey" onClick={this.props.handleOperator}>/</button>
                     <button className="Key TimesKey" onClick={this.props.handleOperator}>x</button>
