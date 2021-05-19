@@ -1,0 +1,86 @@
+.CalcKeys {
+    width: 100%;
+    height: 26rem;
+    margin: 1.5rem 0 0 0;
+    border-radius: .6rem;
+    background: $Very-dark-desaturated-blue-toggle-background-keypad-background;
+    transition: all .4s ease-in;
+    @include media-md {
+        height: 25rem;
+        border-radius: .7rem;
+    }
+    @include media-lg {
+        height: 30rem;
+        border-radius: .7rem;
+    }
+    .KeysCont {
+        width: 100%;
+        height: 100%;
+        padding: 1.4rem;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(5, 1fr );
+        grid-gap: 1.2rem .8rem;
+        grid-template-areas: 
+        "seven eight nine del"
+        "four five six plus"
+        "one two three minus"
+        "dot zero divide multiply"
+        "resetkey resetkey equal equal";
+        @include media-lg {
+            grid-gap: 1.5rem 1.3rem;
+        }
+        @include media-xl {
+            padding: 2.3rem;
+            grid-gap: 1.7rem 1.6rem;
+        }
+        .Key {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: $Very-dark-grayish-blue;
+            border: 0;
+            border-radius: 5px;
+            outline: 0;
+            background: $Light-grayish-orange-key-background;
+            box-shadow: 0px 6px 0px 0px $Grayish-orange-key-shadow;
+            transition: background-color .4s ease-in, box-shadow .4s ease-in;
+            user-select: none;
+            &:active {
+                transform: translateY(2px);
+            }
+            @include media-lg {
+                border-radius: 8px;
+            }
+        }    
+        .DelKey, .ResetKey {
+            text-transform: uppercase;
+            font-size: 1rem;
+            font-weight: 600;
+            color: $White-text;
+            background: $Desaturated-dark-blue-key-background;
+            box-shadow: 0px 6px 0px 0px $Desaturated-dark-blue-key-shadow;
+            transition: background .4s ease-in, box-shadow .4s ease-in;
+            &:active {
+                transform: translateY(2px);
+            }
+        }
+        .ResetKey {
+            grid-area: resetkey;
+        }
+        .EqualsKey {
+            grid-area: equal;
+            color: $White-text;
+            background: $Red-key-background-toggle;
+            box-shadow: 0px 6px 0px 0px $Dark-red-key-shadow;
+            transition: background .4s ease-in, box-shadow .4s ease-in;
+            &:active {
+                transform: translateY(2px);
+            }   
+        }
+    }
+    
+}

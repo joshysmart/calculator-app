@@ -1,0 +1,94 @@
+.Header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    color: $White-text;
+    margin: 0 0 2rem 0;
+    transition: all .4s ease-in;
+    .Logo {
+        h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+    }
+    .Themes {
+        width: 150px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+
+        .ThemeText {
+            p {
+                font-size: .8rem;
+                font-weight: 700;
+                margin: 0;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+            }
+        }
+
+        .ToggleThemes {
+            display: flex;
+            width: 75px;
+            height: 25px;
+            border-radius: 15px;
+            background: $Very-dark-desaturated-blue-toggle-background-keypad-background;
+            transition: all .4s ease-in;
+            .Toggle {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                .ToggleKey {
+                    width: calc(100% / 3);
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    &:hover {
+                        &::after {
+                            border: 1px solid $Red-key-background-toggle;
+                        }
+                    }
+                }
+                .CurrentTheme {
+                    &::after {
+                        background: $Red-key-background-toggle;
+                        transition: all .4s ease-in;
+                    }
+                }
+                .KeyOne, .KeyTwo, .KeyThree {
+                    position: relative;
+                    &::before {
+                        position: absolute;
+                        content: '1';
+                        top: -20px;
+                        right: 50%;
+                        font-size: .75rem;
+                        font-weight: 100;
+
+                    }
+                    &::after {
+                        width: 15px;
+                        height: 15px;
+                        position: absolute;
+                        content: '';
+                        font-size: .8rem;
+                        border-radius: 50%;
+                    }
+                }
+                .KeyTwo {
+                    &::before {
+                        content: '2';
+                    }
+                }
+                .KeyThree {
+                    &::before {
+                        content: '3';
+                    }
+                }
+            }
+        }
+    }
+}
