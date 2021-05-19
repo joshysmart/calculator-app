@@ -95,7 +95,7 @@ class Calculator extends Component {
         }
         if (this.state.firstValue && this.state.prevValue && this.state.operand) {
             this.setState((prev) => {
-                const result = this.evalExpr(prev.firstValue.toString().replace(/,/g, ""), prev.operator, prev.operand.toString().replace(/,/g, "")).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                const result = this.evalExpr(prev.firstValue.toString().replace(/,/g, ""), prev.operator, prev.operand.toString().replace(/,/g, "")).toString().substring(0,11).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 return {
                     "firstValue": result,
                     "operator": operator,
