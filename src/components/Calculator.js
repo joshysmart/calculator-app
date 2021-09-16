@@ -8,6 +8,7 @@ class Calculator extends Component {
     constructor() {
         super();
         this.state = {
+            "formattedResult": "",
             "operand": "",
             "text": "",
             "firstValue": 0,
@@ -27,14 +28,16 @@ class Calculator extends Component {
     handleEval() {
         if (this.state.firstValue) {
             this.setState((prev) => {
-                let result = this.evalExpr(prev.firstValue.toString().replace(/,/g, ""), prev.operator, prev.operand.toString().replace(/,/g, "")).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                console.log(result.length)
-                if (result.length > 11) {
-                    result = parseFloat(result.replace(/,/g, "")).toExponential(6).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                const result = this.evalExpr(prev.firstValue, prev.operator, prev.operand)
+                let formattedResult = result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                if (`${result}`.length > 11) {
+                    formattedResult = parseFloat(result).toExponential(6).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    console.log(result, formattedResult)
                 }
                 return {
                     "firstValue": null,
                     "operator": null,
+                    "formattedResult": formattedResult,
                     "operand": result,
                     "text": ""
                 }
@@ -44,10 +47,11 @@ class Calculator extends Component {
         }
     }
     handleDel(e) {
-        const newText = `${this.state.operand}`.replace(/,/g, "").slice(0,-1)
+        const newText = `${this.state.formattedResult}`.slice(0,-1);
         this.setState((prev) => {
             return {
-                "operand": newText.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+                "formattedResult": newText.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+                "operand": parseFloat(newText.replace(",", "")),
                 "animate": false,
                 "text": newText,
                 "prevValue": prev.firstValue
@@ -58,6 +62,7 @@ class Calculator extends Component {
         this.setState((prev) => {
             return {
                 "operand": "",
+                "formattedResult": "",
                 "text": "",
                 "firstValue": 0,
                 "operator": null,
@@ -70,7 +75,8 @@ class Calculator extends Component {
         const text = this.state.text + e.target.textContent;
         this.setState((prev) => {
             return {
-                "operand": text.toString().substring(0,11).replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+                "operand": text.toString().substring(0,11),
+                "formattedResult": text.toString().substring(0,11).replace(/\B(?=(\d{3})+(?!\d))/g, ","),
                 "animate": false,
                 "text": text,
                 "prevValue": prev.firstValue
@@ -83,6 +89,7 @@ class Calculator extends Component {
             this.setState((prev) => {
                 return {
                     "operand": text,
+                    "formattedResult": text.toString().substring(0,11).replace(/\B(?=(\d{3})+(?!\d))/g, ","),
                     "text": text
                 }
             })
@@ -99,14 +106,16 @@ class Calculator extends Component {
         }
         if (this.state.firstValue && this.state.prevValue && this.state.operand) {
             this.setState((prev) => {
-                let result = this.evalExpr(prev.firstValue.toString().replace(/,/g, ""), prev.operator, prev.operand.toString().replace(/,/g, "")).toString().substring(0,11).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                if (result.length > 11) {
-                    result = parseFloat(result.replace(/,/g, "")).toExponential(6).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                const result = this.evalExpr(prev.firstValue, prev.operator, prev.operand)
+                let formattedResult = result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                if (`${result}`.length > 11) {
+                    formattedResult = parseFloat(result).toExponential(6).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 }
                     return {
                     "firstValue": result,
                     "operator": operator,
                     "operand": result,
+                    "formattedResult": formattedResult,
                     "secondValue": prev.operand,
                     "prevValue": null,
                     "text": ""

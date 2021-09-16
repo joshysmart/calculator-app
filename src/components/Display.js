@@ -8,7 +8,7 @@ class Display extends Component {
     render() {
         return (
             <section className="Display">
-                <div className="Expression"><span className={`Text ${this.props.state.animate && "animate"}`}>{this.props.state.animate ? "|" : this.props.state.operand}</span></div>
+                <div className="Expression"><span className={`Text ${this.props.state.animate && "animate"}`}>{this.props.state.animate ? "|" : this.props.state.formattedResult}</span></div>
             </section>  
         )
     }
